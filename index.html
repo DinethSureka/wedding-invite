@@ -260,49 +260,57 @@
   .sun{transform:translateY(60px);opacity:0;transition:transform 3s var(--e),opacity 2s ease}
   .in .sun{transform:none;opacity:1}
 
-  /* ================= PLAN / TIMELINE ================= */
-  #plan{padding-top:clamp(190px,30vw,260px)}
-  #plan::before{content:"";position:absolute;left:0;right:0;top:0;height:clamp(150px,24vw,220px);z-index:0;pointer-events:none;
-    background:linear-gradient(180deg,#5E7752 0%,rgba(94,119,82,.55) 35%,rgba(94,119,82,0) 100%)}
-  #plan .wrap{position:relative;z-index:1}
-  .plan-wrap{max-width:760px}
-  .tl{position:relative;margin-top:56px;text-align:left}
-  .tl::before,.tl .fill{content:"";position:absolute;left:23px;top:22px;bottom:22px;width:2px;border-radius:2px}
-  .tl::before{background:repeating-linear-gradient(180deg,rgba(94,119,82,.38) 0 4px,transparent 4px 10px)}
-  .tl .fill{bottom:auto;height:var(--p,0px);background:linear-gradient(180deg,var(--sage),var(--sage-d));transition:height .12s linear}
-  .ti{position:relative;padding:0 0 46px 74px;min-height:48px}
-  .ti:last-child{padding-bottom:0}
-  .ti .ic{position:absolute;left:0;top:0;width:48px;height:48px;border-radius:50%;background:var(--ivory);
-    border:1.5px solid rgba(94,119,82,.5);display:grid;place-items:center;transition:all .6s var(--e);z-index:2}
-  .ti .ic svg{width:22px;height:22px;stroke:var(--sage-d);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;transition:stroke .5s ease}
-  .ti.on .ic{background:var(--sage-d);border-color:var(--sage-d);box-shadow:0 0 0 7px rgba(143,163,126,.22)}
-  .ti.on .ic svg{stroke:#FBF8F1}
-  .ti h4{font-family:var(--serif);font-weight:500;font-size:clamp(23px,5vw,28px);color:var(--forest);line-height:1.2;padding-top:6px}
-  .ti p{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--mute);margin-top:4px}
-  .ti .tm{display:block;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:6px}
-  @media(min-width:820px){
-    .tl::before,.tl .fill{left:calc(50% - 1px)}
-    .ti{width:50%;padding:0 66px 56px 0;text-align:right}
-    .ti .ic{left:auto;right:-24px}
-    .ti:nth-child(even){margin-left:50%;padding:0 0 56px 66px;text-align:left}
-    .ti:nth-child(even) .ic{right:auto;left:-24px}
-  }
-
   /* ================= CLOSING ================= */
-  .closing{padding:clamp(80px,14vw,150px) 0 90px}
+  .closing{padding:clamp(190px,30vw,260px) 0 90px}
+  .closing::before{content:"";position:absolute;left:0;right:0;top:0;height:clamp(150px,24vw,220px);z-index:0;pointer-events:none;
+    background:linear-gradient(180deg,#5E7752 0%,rgba(94,119,82,.55) 35%,rgba(94,119,82,0) 100%)}
+  .closing .wrap{position:relative;z-index:1}
   .mono{width:112px;height:112px;margin:0 auto 30px;position:relative;display:grid;place-items:center;
     font-family:var(--script);font-size:44px;color:var(--forest)}
   .mono svg{position:absolute;inset:0;width:100%;height:100%}
   .mono circle.d{stroke-dasharray:6 8;animation:spin 40s linear infinite;transform-origin:50% 50%}
+  .mono circle.d2{animation:spin 30s linear infinite reverse;transform-origin:50% 50%}
   @keyframes spin{to{transform:rotate(360deg)}}
-  .thanks{font-family:var(--script);font-size:clamp(44px,10vw,74px);color:var(--sage-d);line-height:1.1}
+  .thanks{font-family:var(--script);font-size:clamp(44px,10vw,74px);line-height:1.1;
+    --c:var(--sage-d);background:linear-gradient(100deg,var(--c) 42%,#F6E7BE 50%,var(--c) 58%);
+    background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:sheen 7s ease-in-out 1s infinite}
+  @keyframes sheen{0%,72%,100%{background-position:200% 0}38%{background-position:-40% 0}}
   .closing .lead{max-width:34ch}
-  .closing .spr{position:absolute;bottom:-6px;width:min(52vw,300px);height:auto;overflow:visible;pointer-events:none}
+  .closing .spr{position:absolute;bottom:-6px;width:min(52vw,300px);height:auto;overflow:visible;pointer-events:none;z-index:1}
   .closing .c1{left:-10px;}
   .closing .c2{right:-10px;transform:scaleX(-1)}
   .compl{margin-top:54px;font-family:var(--serif);font-style:italic;font-size:19px;color:var(--mute)}
   .compl b{display:block;font-style:normal;font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.36em;
     text-transform:uppercase;color:var(--gold);margin-top:8px}
+
+  /* ---------- shared gold shimmer on script section titles ---------- */
+  .title{--c:var(--sage-d);background:linear-gradient(100deg,var(--c) 42%,#F6E7BE 50%,var(--c) 58%);
+    background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;
+    animation:sheen 7s ease-in-out infinite}
+
+  /* ---------- idle life after reveal ---------- */
+  .fam.in{animation:float 6.5s ease-in-out infinite}
+  .fam.l.in{animation-delay:.1s}
+  .fam.r.in{animation-delay:.5s}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  .arch-wrap.in .arch img{transform:scale(1);animation:breathe 11s ease-in-out 2.8s infinite}
+  @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+  .cd div{transition:transform .1s ease}
+  .cd.tick div:last-child{animation:beatcd .5s ease}
+  @keyframes beatcd{0%{transform:scale(1)}35%{transform:scale(1.07)}100%{transform:scale(1)}}
+  .sunCore{animation:corepulse 5s ease-in-out infinite}
+  @keyframes corepulse{0%,100%{opacity:.85}50%{opacity:1}}
+
+  /* ---------- twinkling sparkle dust ---------- */
+  #spark{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+  .sp{position:absolute;border-radius:50%;background:var(--gold);opacity:0;animation:tw ease-in-out infinite}
+  @keyframes tw{0%,100%{opacity:0;transform:scale(.3)}50%{opacity:var(--o,.85);transform:scale(1)}}
+
+  /* ---------- petal/leaf burst on tapping the seal ---------- */
+  .burst-p{position:fixed;left:0;top:0;z-index:150;pointer-events:none;
+    transform:translate(-50%,-50%);animation:burst 1.15s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes burst{to{transform:translate(calc(-50% + var(--bx)),calc(-50% + var(--by))) rotate(var(--br));opacity:0}}
 
   @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
@@ -328,6 +336,7 @@
 </div>
 
 <div id="fall" aria-hidden="true"></div>
+<div id="spark" aria-hidden="true"></div>
 
 <!-- ============ 1. HERO ============ -->
 <section class="hero" id="top">
@@ -336,9 +345,9 @@
     <div class="txt">
       <span class="deva hx" style="--d:1.9s" data-deva>शुभ विवाह</span>
       <span class="ey hx" style="--d:2.1s">The wedding of</span>
-      <span class="nm write" style="--d:2.4s" data-bind="bride.name">Bride</span>
+      <span class="nm write" style="--d:2.4s" id="heroBrideNm" data-bind="bride.name">Bride</span>
       <span class="amp hx" style="--d:3.4s">&amp;</span>
-      <span class="nm write" style="--d:3.6s" data-bind="groom.name">Groom</span>
+      <span class="nm write" style="--d:3.6s" id="heroGroomNm" data-bind="groom.name">Groom</span>
       <span class="mini hx" style="--d:4.6s"></span>
       <span class="day hx" style="--d:4.8s" id="heroDay">Friday</span>
       <span class="date hx" style="--d:5s" id="heroDate">11 December 2026</span>
@@ -352,7 +361,7 @@
 <section class="pad" id="families">
   <div class="wrap">
     <p class="eyebrow rv">With the blessings of our families</p>
-    <h2 class="title rv" style="--d:.1s">Near &amp; Dear</h2>
+    <h2 class="title rv" style="--d:.1s">With Love &amp; Blessings</h2>
     <p class="lead rv" style="--d:.2s">Together with their beloved families, request the pleasure of your company at the celebration of their marriage.</p>
 
     <div class="fams">
@@ -397,7 +406,7 @@
       <div><b id="cdD">--</b><span>Days</span></div>
       <div><b id="cdH">--</b><span>Hours</span></div>
       <div><b id="cdM">--</b><span>Minutes</span></div>
-      <div><b id="cdS">--</b><span>Seconds</span></div>
+      <div id="cdSBox"><b id="cdS">--</b><span>Seconds</span></div>
     </div>
   </div>
 </section>
@@ -423,22 +432,14 @@
   <div class="mts" id="mts"><svg id="mtsSvg" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg></div>
 </section>
 
-<!-- ============ 6. THE PLAN ============ -->
-<section class="pad" id="plan">
-  <div class="wrap plan-wrap">
-    <p class="eyebrow rv">How our day will unfold</p>
-    <h2 class="title rv" style="--d:.1s">The Plan</h2>
-    <div class="tl" id="tl"><div class="fill" id="tlFill"></div></div>
-  </div>
-</section>
-
-<!-- ============ 7. CLOSING ============ -->
+<!-- ============ 6. CLOSING ============ -->
 <section class="closing">
   <svg class="spr c1" viewBox="0 0 300 300" data-sprig="7" aria-hidden="true"></svg>
   <svg class="spr c2" viewBox="0 0 300 300" data-sprig="8" aria-hidden="true"></svg>
   <div class="wrap">
     <div class="mono rv z">
       <svg viewBox="0 0 112 112" fill="none" aria-hidden="true">
+        <circle class="d d2" cx="56" cy="56" r="40" stroke="#8FA37E" stroke-width=".8" stroke-dasharray="2 7"/>
         <circle class="d" cx="56" cy="56" r="54" stroke="#B69455" stroke-width=".9"/>
         <circle cx="56" cy="56" r="47" stroke="#8FA37E" stroke-width="1"/>
       </svg>
@@ -455,8 +456,8 @@
    EDIT EVERYTHING HERE  -  names, parents, date, venue, programme
    ===================================================================== */
 const INVITE = {
-  bride: { name: "Bride", p1: "Yam Bahadur Gurung", p2: "Chitra Gurung" },
-  groom: { name: "Groom", p1: "Late Budh Bahadur Gurung", p2: "Kali Maya Gurung" },
+  bride: { name: "Manu Gurung", p1: "Yam Bahadur Gurung", p2: "Chitra Gurung" },
+  groom: { name: "Khush Bahadur Gurung", p1: "Late Budh Bahadur Gurung", p2: "Kali Maya Gurung" },
 
   date: "2026-12-11",            // YYYY-MM-DD   (Friday)
   startTime: "00:00",            // used only for the countdown, 24h, Nepal time
@@ -466,18 +467,7 @@ const INVITE = {
   mapQuery: "Bhujung Village Lamjung Nepal",   // or paste a Google Maps link in mapUrl
   mapUrl: "",
   showDevanagari: true,          // small "शुभ विवाह" (auspicious wedding) above the names
-  photoCaption: "Forever begins with a yes",
-
-  // The Plan. Add a time such as "10:30 AM" to any item and it will show up.
-  plan: [
-    { icon: "rings",    title: "Wedding Ceremony",   note: "The exchange of vows",           time: "" },
-    { icon: "heart",    title: "Rings & Blessings",  note: "Blessings from our elders",      time: "" },
-    { icon: "camera",   title: "Photoshoot",         note: "Family and friends portraits",   time: "" },
-    { icon: "cake",     title: "Cake Cutting",       note: "A sweet beginning",              time: "" },
-    { icon: "lunch",    title: "Lunch",              note: "A shared feast",                 time: "" },
-    { icon: "glass",    title: "Reception",          note: "Music, dance and celebration",   time: "" },
-    { icon: "car",      title: "Happily Ever After", note: "The journey begins",             time: "" }
-  ]
+  photoCaption: "Forever begins with a yes"
 };
 /* ===================================================================== */
 
@@ -508,6 +498,13 @@ const ini = (INVITE.bride.name[0]+'&'+INVITE.groom.name[0]).toUpperCase();
 $('#monoGate').textContent = ini; $('#monoEnd').textContent = ini;
 document.title = `${INVITE.bride.name} & ${INVITE.groom.name} - Wedding Invitation`;
 $('#mapBtn').href = INVITE.mapUrl || ('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(INVITE.mapQuery));
+/* first names only in the large hero script (keeps long full names from overflowing) */
+const shortOf = n => n.trim().split(/\s+/)[0];
+const bShort = shortOf(INVITE.bride.name), gShort = shortOf(INVITE.groom.name);
+$('#heroBrideNm').textContent = bShort; $('#heroGroomNm').textContent = gShort;
+[[$('#heroBrideNm'),bShort],[$('#heroGroomNm'),gShort]].forEach(([el,txt])=>{
+  const f = Math.max(.6, Math.min(1, 6/txt.length)); el.style.fontSize = (13.4*f).toFixed(2)+'cqw';
+});
 
 /* ---------- tiny helpers ---------- */
 function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);
@@ -607,12 +604,44 @@ document.head.appendChild(st);
   }
 })();
 
+/* ---------- twinkling sparkle dust ---------- */
+(function(){
+  if(reduce) return;
+  const box=$('#spark'), R=rng(55);
+  for(let i=0;i<22;i++){
+    const s=document.createElement('span'), sz=1.5+R()*2.4;
+    s.className='sp'; s.style.left=(R()*100)+'vw'; s.style.top=(R()*100)+'vh';
+    s.style.width=s.style.height=sz+'px';
+    s.style.animationDuration=(2.6+R()*3.4)+'s'; s.style.animationDelay=(-R()*6)+'s';
+    s.style.setProperty('--o',(.5+R()*.4).toFixed(2));
+    box.appendChild(s);
+  }
+})();
+
+/* ---------- petal/leaf burst from the seal ---------- */
+function seedBurst(x,y){
+  for(let i=0;i<12;i++){
+    const el=document.createElement('div'), ang=Math.random()*Math.PI*2, dist=70+Math.random()*130;
+    el.className='burst-p'; el.style.left=x+'px'; el.style.top=y+'px';
+    el.style.setProperty('--bx',(Math.cos(ang)*dist).toFixed(0)+'px');
+    el.style.setProperty('--by',(Math.sin(ang)*dist).toFixed(0)+'px');
+    el.style.setProperty('--br',(Math.random()*360).toFixed(0)+'deg');
+    const petal=i%2===0, col=petal?'#EBB4AB':GREENS[i%GREENS.length];
+    el.innerHTML=petal
+      ?`<svg width="14" height="16" viewBox="-11 -2 22 16"><path d="M0 0C7-4 12 5 0 13C-12 5-7-4 0 0Z" fill="${col}"/></svg>`
+      :`<svg width="10" height="18" viewBox="-8 -33 16 34"><path d="${LEAF}" fill="${col}"/></svg>`;
+    document.body.appendChild(el);
+    el.addEventListener('animationend',()=>el.remove());
+  }
+}
+
 /* ---------- gate ---------- */
 const gate=$('#gate'), btn=$('#openBtn');
 btn.focus({preventScroll:true});
 html.classList.add('locked');
 function openGate(){
   if(gate.classList.contains('open')) return;
+  const r=btn.getBoundingClientRect(); if(!reduce) seedBurst(r.left+r.width/2, r.top+r.height/2);
   gate.classList.add('open'); html.classList.remove('locked');
   document.body.classList.add('go'); window.scrollTo(0,0);
   setTimeout(()=>gate.remove(), 2400);
@@ -636,6 +665,7 @@ $$('.rv').forEach(n=>io.observe(n));
     const s=Math.floor(ms/1000);
     els.D.textContent=Math.floor(s/86400); els.H.textContent=p(Math.floor(s%86400/3600));
     els.M.textContent=p(Math.floor(s%3600/60)); els.S.textContent=p(s%60);
+    if(!reduce){ box.classList.remove('tick'); void box.offsetWidth; box.classList.add('tick'); }
   }
   const iv=setInterval(tick,1000); tick();
 })();
@@ -671,7 +701,7 @@ $('#icsBtn').addEventListener('click',()=>{
   const svg=$('#mtsSvg'), W=1200, H=340; svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
   const defs=E('defs',{},svg), gr=E('radialGradient',{id:'sunG'},defs);
   E('stop',{offset:'0','stop-color':'#F7DDB0','stop-opacity':.95},gr); E('stop',{offset:'1','stop-color':'#F7DDB0','stop-opacity':0},gr);
-  const sun=E('g',{class:'sun'},svg); E('circle',{cx:880,cy:150,r:120,fill:'url(#sunG)'},sun); E('circle',{cx:880,cy:150,r:34,fill:'#F6D9A6',opacity:.85},sun);
+  const sun=E('g',{class:'sun'},svg); E('circle',{cx:880,cy:150,r:120,fill:'url(#sunG)'},sun); E('circle',{cx:880,cy:150,r:34,fill:'#F6D9A6',opacity:.85,class:'sunCore'},sun);
   const jag=p=>'M0 '+H+'L'+p.map(q=>q.join(' ')).join('L')+`L${W} ${H}Z`;
   const line=p=>{let d=`M${p[0][0]} ${p[0][1]}`;for(let i=1;i<p.length;i++){const a=p[i-1],b=p[i],mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2;d+=`Q${a[0]} ${a[1]} ${mx} ${my}`}
     const l=p[p.length-1];return d+`L${l[0]} ${l[1]}`};
@@ -695,30 +725,6 @@ $('#icsBtn').addEventListener('click',()=>{
   new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){$('#mts').classList.add('in');o.disconnect()}}),{threshold:.2}).observe($('#mts'));
 })();
 
-/* ---------- plan / timeline ---------- */
-(function(){
-  const icons={
-    rings:'<circle cx="9" cy="15" r="5"/><circle cx="15" cy="15" r="5"/><path d="M9.5 5.5L11 3h2l1.5 2.5L12 8z"/>',
-    heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
-    camera:'<rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.6"/><path d="M8 7l1.5-3h5L16 7"/>',
-    cake:'<path d="M4 20h16M5 20v-6h14v6M5 14c2 0 2-2 3.5-2S10 14 12 14s2-2 3.5-2S17 14 19 14M12 12V9"/><path d="M12 9c-1.3-1.2-1.1-2.4 0-3.6 1.1 1.2 1.3 2.4 0 3.6z"/>',
-    lunch:'<path d="M5 3v6a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 21V3c-2.2 1.2-3.5 4-3.5 7.5H17"/>',
-    glass:'<path d="M5 3h7l-1 6.5a2.5 2.5 0 0 1-5 0L5 3zM8.5 12v8M6 20h5"/><path d="M15 6l4 1-1.5 5a2.5 2.5 0 0 1-4.7-1.4M15.8 14.5l-1 5.5M13 20h5"/>',
-    car:'<path d="M3 16v-3l2-5h14l2 5v3zM3 16v3h3v-3M18 16v3h3v-3"/><circle cx="7" cy="13" r=".8"/><circle cx="17" cy="13" r=".8"/><path d="M5 11h14"/>'
-  };
-  const tl=$('#tl'), fill=$('#tlFill');
-  INVITE.plan.forEach((it,i)=>{
-    const d=document.createElement('div'); d.className='ti rv'; d.style.setProperty('--d','.05s');
-    d.innerHTML=`<span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true">${icons[it.icon]||icons.heart}</svg></span>
-      <h4>${it.title}</h4>${it.note?`<p>${it.note}</p>`:''}${it.time?`<span class="tm">${it.time}</span>`:''}`;
-    tl.appendChild(d); io.observe(d);
-  });
-  const items=$$('.ti',tl); let raf=0;
-  function upd(){ raf=0; const r=tl.getBoundingClientRect(), line=innerHeight*.62;
-    const h=Math.max(0,Math.min(r.height-44,line-r.top-22)); fill.style.setProperty('--p',h+'px');
-    items.forEach(n=>n.classList.toggle('on',n.getBoundingClientRect().top+24<line)); }
-  addEventListener('scroll',()=>{ if(!raf) raf=requestAnimationFrame(upd) },{passive:true}); addEventListener('resize',upd); upd();
-})();
 })();
 </script>
 </body>
